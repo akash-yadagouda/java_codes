@@ -5,25 +5,31 @@ public class SplitArrayLargestSum {
 	public static void main(String[] args) {
 
 
-		System.out.println("hi");
+		// System.out.println("hi");
 		// int arr[] = {1, 2, 3, 4, 5};
 		// int m = 2		int
 
-		// int arr[] = {5, 2, 4, 1, 3, 6, 0}; // 21
-		// int m = 4;
+		int arr1[] = {5, 2, 4, 1, 3, 6, 0}; // 21
+		int m1 = 4;
+		System.out.println("Ans : " + splitArray(arr1, m1));
 
 		int arr[] = {7, 2, 5, 10, 8};
 		int m = 2;
 
-		// 18
+		// // 18
 		int ans ;
-		// = getSpiltArrayCount(arr, 17);
-		// System.out.println(ans);
-		// int min = getMax(arr);
-		// System.out.println("min :" + min);
+		// // = getSpiltArrayCount(arr, 17);
+		// // System.out.println(ans);
+		// // int min = getMax(arr);
+		// // System.out.println("min :" + min);
 
-		ans = getAns(arr, m);
+		ans = splitArray(arr, m);
 		System.out.println("ans :" + ans);
+	}
+	public static int splitArray(int[] nums, int m) {
+
+		return getAns(nums, m);
+
 	}
 
 	public static int getAns(int arr[] , int m) {
@@ -37,13 +43,11 @@ public class SplitArrayLargestSum {
 		start = minArray;
 		end = maxArray;
 
-		while (start <= end) {
+		while (start != end) {
 			// System.out.println("inside while");
 
+
 			mid = (start + end) / 2;
-
-
-
 
 			// System.out.println("enter the num");
 
@@ -52,16 +56,16 @@ public class SplitArrayLargestSum {
 			System.out.println("mid :" + mid + "Start :" + start + " end :" + end );
 			int p = getSpiltArrayCount(arr, mid);
 			System.out.println("p :" + p);
-			System.out.println("mid :" + mid + "Start :" + start + " end :" + end );
+			// System.out.println("mid :" + mid + "Start :" + start + " end :" + end );
 
 			if (p <= m) {
-				end = mid - 1;
+				end = mid  ;
 			} else if (p > m) {
 				start = mid + 1;
 			}
 
 		}
-		return mid;
+		return start;
 	}
 
 	public static int getSpiltArrayCount(int arr[], int givenSum) {
@@ -74,11 +78,7 @@ public class SplitArrayLargestSum {
 		while (i < arr.length) {
 			sum = sum + arr[i];
 
-			if (sum == givenSum) {
-				sum = 0;
-				counter++;
-				i++;
-			} else if (sum > givenSum) {
+			if (sum > givenSum) {
 				sum = 0;
 				counter++;
 			} else {
@@ -110,5 +110,20 @@ public class SplitArrayLargestSum {
 			sum += arr[i];
 		}
 		return sum;
+	}
+
+	public static int getSpiltArrayCountByKunal(int nums[], int mid) {
+		int sum = 0;
+		int p = 1;
+
+		for (int num : nums) {
+			if (sum + num > mid) {
+				sum = num;
+				p++;
+			} else {
+				sum += num;
+			}
+		}
+		return p;
 	}
 }
